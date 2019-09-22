@@ -75,7 +75,7 @@ import org.joda.time.Interval;
 import org.joda.time.Period;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import com.datasphere.datasource.dataconnection.DataConnection;
+import com.datasphere.datasource.connections.DataConnection;
 import com.datasphere.datasource.ingestion.HdfsIngestionInfo;
 import com.datasphere.datasource.ingestion.HiveIngestionInfo;
 import com.datasphere.datasource.ingestion.IngestionHistory;

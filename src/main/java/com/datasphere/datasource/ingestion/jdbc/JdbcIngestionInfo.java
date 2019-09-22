@@ -17,7 +17,7 @@ package com.datasphere.datasource.ingestion.jdbc;
 import java.util.List;
 import java.util.Map;
 
-import com.datasphere.datasource.dataconnection.DataConnection;
+import com.datasphere.datasource.connections.DataConnection;
 import com.datasphere.datasource.ingestion.IngestionInfo;
 import com.datasphere.datasource.ingestion.file.FileFormat;
 
@@ -27,27 +27,27 @@ import com.datasphere.datasource.ingestion.file.FileFormat;
 public abstract class JdbcIngestionInfo implements IngestionInfo {
 
   /**
-   * 내부에서 관리되고 있지 않은 JDBC 연결일 경우 적재 정보내 명시하여 관리
+   * In the case of a JDBC connection that is not managed internally, specify it in the loading information
    */
   DataConnection connection;
 
   /**
-   * JBDC 데이터베이스(스키마) 정보
+   * JBDC Database (schema) information
    */
   String database;
 
   /**
-   * 질의한 데이터 형태, 쿼리문 또는 테이블
+   * Queryed data type, query statement, or table
    */
   DataType dataType;
 
   /**
-   * DataType 에 따라 쿼리문 또는 테이블 명
+   * DataType Query statement or table name, depending on
    */
   String query;
 
   /**
-   * 질의 결과를 담는 파일 포맷 정의
+   * Define file format to contain query results
    */
   FileFormat format;
 

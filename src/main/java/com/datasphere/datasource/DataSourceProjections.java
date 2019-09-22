@@ -21,7 +21,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 import java.util.Map;
 
-import com.datasphere.datasource.dataconnection.DataConnection;
+import com.datasphere.datasource.connections.DataConnection;
 import com.datasphere.datasource.ingestion.IngestionInfo;
 import com.datasphere.server.common.BaseProjections;
 //import com.datasphere.server.domain.dataprep.entity.PrSnapshot;
