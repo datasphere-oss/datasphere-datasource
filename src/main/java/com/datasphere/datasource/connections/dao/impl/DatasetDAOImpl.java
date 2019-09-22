@@ -12,7 +12,7 @@ import com.datasphere.common.data.Dataset;
 import com.datasphere.datasource.connections.dao.DatasetDAO;
 import com.datasphere.datasource.connections.dbutils.ConnectionFactory;
 import com.datasphere.datasource.connections.dbutils.JDBCUtils;
-import com.datasphere.datasource.connections.service.DataAccessor;
+import com.datasphere.datasource.connections.jdbc.service.DataAccessor;
 import com.google.gson.Gson;
 
 public class DatasetDAOImpl implements DatasetDAO {

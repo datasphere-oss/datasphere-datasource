@@ -10,7 +10,7 @@
  * See the Mulan PSL v1 for more details.
  */
 
-package com.datasphere.datasource.connections.service;
+package com.datasphere.datasource.connections.jdbc.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 
 import com.datasphere.datasource.connections.jdbc.JdbcConnectInformation;
 import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect;
-import com.datasphere.datasource.dataconnection.dialect.HiveDialect;
+import com.datasphere.datasource.connections.jdbc.dialect.HiveDialect;
 
 /**
  *
@@ -37,7 +37,7 @@ public class KerberosJdbcConnector extends CachedUserJdbcConnector {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(KerberosJdbcConnector.class);
 
-  @Value("${polaris.engine.ingestion.hive.keytab:}")
+  @Value("${datasphere.engine.ingestion.hive.keytab:}")
   String keyTabPath;
 
   @Override

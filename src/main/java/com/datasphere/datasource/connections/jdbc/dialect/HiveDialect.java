@@ -137,15 +137,15 @@ public class HiveDialect implements JdbcDialect {
 
   @Override
   public String getConnectorClass(JdbcConnectInformation connectInfo) {
-    return "com.datasphere.server.domain.dataconnection.connector.KerberosJdbcConnector";
+    return "com.datasphere.datasource.connections.jdbc.connector.KerberosJdbcConnector";
   }
 
   @Override
   public String getDataAccessorClass(JdbcConnectInformation connectInfo) {
     if(HiveDialect.includeMetastoreInfo(connectInfo)){
-      return "com.datasphere.server.domain.dataconnection.accessor.HiveDataAccessorUsingMetastore";
+      return "com.datasphere.datasource.connections.jdbc.accessor.HiveDataAccessorUsingMetastore";
     }
-    return "com.datasphere.server.domain.dataconnection.accessor.HiveDataAccessor";
+    return "com.datasphere.datasource.connections.jdbc.accessor.HiveDataAccessor";
   }
 
   @Override

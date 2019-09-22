@@ -32,7 +32,7 @@ public class DataSourceMessagingController {
   public SimpMessageSendingOperations messagingTemplate;
 
   /**
-   * Workspace 화면 진입시 호출
+   * Call when entering Workspace screen
    *
    * @param accessor
    * @param workbenchId

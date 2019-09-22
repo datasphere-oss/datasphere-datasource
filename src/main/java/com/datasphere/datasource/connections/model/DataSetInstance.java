@@ -6,7 +6,7 @@ package com.datasphere.datasource.connections.model;
 public class DataSetInstance {
     private String id; //组件实例id
     private String columnsJSON;//对应的字段，JSONArray格式
-    private String ciSql;//对应的sql语句，等价于工作流处理的中间结果集，用于daas jdbc查询
+    private String ciSql;//对应的sql语句，等价于工作流处理的中间结果集，用于datsphere jdbc查询
     /** 版本号对应着结果集的全路径："spaceName".dbName.tableName */
     private String newVersion;//单表查询对应的版本号
     private String joinNewVersion;//两表关联查询对应的版本号

@@ -27,9 +27,9 @@ import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionEr
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
 
 @Extension
-public class MSSQLDataAccessor extends AbstractJdbcDataAccessor {
+public class SnowflakeDataAccessor extends AbstractJdbcDataAccessor {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(MSSQLDataAccessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SnowflakeDataAccessor.class);
 
   @Override
   public Map<String, Object> getDatabases(String catalog, String schemaPattern, Integer pageSize, Integer pageNumber) throws JdbcDataConnectionException {

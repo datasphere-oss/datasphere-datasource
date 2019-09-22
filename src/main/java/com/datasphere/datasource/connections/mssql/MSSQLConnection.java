@@ -121,7 +121,7 @@ public class MSSQLConnection {
         builder.append(":").append(connectInfo.getPort());
       }
 
-      // Set DataBase
+      // Set Database
       if(StringUtils.isNotEmpty(connectInfo.getDatabase()) && includeDatabase) {
         builder.append(";");
         builder.append("database=");

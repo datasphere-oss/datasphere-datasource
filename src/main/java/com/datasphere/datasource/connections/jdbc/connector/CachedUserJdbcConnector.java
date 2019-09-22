@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
 import com.datasphere.datasource.connections.jdbc.JdbcConnectInformation;
 import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect;
 import com.datasphere.server.common.exception.ResourceNotFoundException;
-import com.datasphere.server.domain.user.CachedUserService;
-import com.datasphere.server.domain.user.User;
+import com.datasphere.server.user.service.CachedUserService;
+import com.datasphere.server.user.User;
 import com.datasphere.server.util.AuthUtils;
 
 /**
