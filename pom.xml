@@ -391,27 +391,8 @@
 			</exclusions>
 		</dependency>
 		<!-- Local jar -->
-		<dependency>
-		    <groupId>org.mozilla.intl</groupId>
-		    <artifactId>chardet</artifactId>
-		    <version>1.0</version>
-		    <scope>system</scope>
-			<systemPath>${project.basedir}/lib/chardet-1.0.jar</systemPath>
-		</dependency>
-		<dependency>
-		    <groupId>org.bson</groupId>
-		    <artifactId>bson</artifactId>
-		    <version>3.2.2</version>
-		    <scope>system</scope>
-			<systemPath>${project.basedir}/lib/bson-3.2.2.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>18.3.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/ojdbc8-18.3.0.0.jar</systemPath>
-		</dependency>
+	
+		
 		
 		<dependency>
 		    <groupId>cglib</groupId>
