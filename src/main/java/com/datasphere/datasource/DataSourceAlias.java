@@ -35,8 +35,8 @@ import javax.persistence.Table;
 import com.datasphere.server.common.GlobalObjectMapper;
 import com.datasphere.server.common.KeepAsJsonDeserialzier;
 import com.datasphere.server.common.entity.Spec;
-import com.datasphere.server.domain.AbstractHistoryEntity;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.AbstractHistoryEntity;
+import com.datasphere.server.common.domain.DSSDomain;
 
 @Entity
 @Table(name = "datasource_alias")
@@ -78,7 +78,7 @@ public class DataSourceAlias extends AbstractHistoryEntity implements DSSDomain<
   private String nameAlias;
 
   /**
-   * 데이터 소스 필드 값 Alias : {"key": "value", ...}
+   * Data source field values Alias : {"key": "value", ...}
    */
   @Column(name = "alias_field_value", length = 65535, columnDefinition = "TEXT")
   @Basic(fetch = FetchType.LAZY)

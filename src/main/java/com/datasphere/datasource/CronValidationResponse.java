@@ -15,6 +15,9 @@ package com.datasphere.datasource;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * CRON任务验证
+ */
 public class CronValidationResponse implements Serializable {
 
   boolean valid;
