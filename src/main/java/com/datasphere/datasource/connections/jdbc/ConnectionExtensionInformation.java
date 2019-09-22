@@ -174,6 +174,19 @@ public class ConnectionExtensionInformation {
      * The Hostname.
      */
     InputMandatory hostname = InputMandatory.OPTIONAL;
+    
+    /**
+     * The IP.
+     */
+    InputMandatory ip = InputMandatory.OPTIONAL;
+    
+    /**
+     * The typename.
+     */
+    InputMandatory typename = InputMandatory.OPTIONAL;
+    
+    
+    
     /**
      * The Port.
      */
@@ -202,8 +215,39 @@ public class ConnectionExtensionInformation {
      * The Password.
      */
     InputMandatory password = InputMandatory.OPTIONAL;
-
+    
     /**
+     * The batchsize.
+     */
+    InputMandatory batchsize = InputMandatory.OPTIONAL;
+    
+    
+
+    public InputMandatory getIp() {
+		return ip;
+	}
+
+	public void setIp(InputMandatory ip) {
+		this.ip = ip;
+	}
+
+	public InputMandatory getTypename() {
+		return typename;
+	}
+
+	public void setTypename(InputMandatory typename) {
+		this.typename = typename;
+	}
+
+	public InputMandatory getBatchsize() {
+		return batchsize;
+	}
+
+	public void setBatchsize(InputMandatory batchsize) {
+		this.batchsize = batchsize;
+	}
+
+	/**
      * Gets authentication type.
      *
      * @return the authentication type

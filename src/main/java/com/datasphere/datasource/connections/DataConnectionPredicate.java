@@ -27,13 +27,13 @@ import java.util.List;
 public class DataConnectionPredicate {
 
   /**
-   * 데이터 소스 기본 검색 관련 조건 정의
+   * Defining Conditions Related to Data Source Basic Search
    *
-   * @param namePattern DataConnection 명 내 포함되는 문자
+   * @param namePattern DataConnection Characters contained within people
    * @param implementor DataConnection DB Type
-   * @param searchDateBy 일자 검색 기준 (생성일/수정일)
-   * @param from 검색 시작일자, yyyy-MM-ddThh:mm:ss.SSSZ
-   * @param to 검색 종료일자, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param searchDateBy Date search criteria (creation date / modification date)
+   * @param from Search start date, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param to Search end date, yyyy-MM-ddThh:mm:ss.SSSZ
    * @return
    */
   public static Predicate searchList(String namePattern,
@@ -169,11 +169,11 @@ public class DataConnectionPredicate {
   }
 
   /**
-   * 데이터 소스 기본 검색 관련 조건 정의
+   *Defining Conditions Related to Data Source Basic Search
    *
-   * @param namePattern DataConnection 명 내 포함되는 문자
+   * @param namePattern DataConnection Characters contained within people
    * @param implementor DataConnection DB Type
-   * @param workspaceId 조회 기준이 되는 workspace
+   * @param workspaceId The inquiry criteria workspace
    * @return
    */
   public static Predicate searchListForWorkspace(String namePattern,
@@ -186,9 +186,9 @@ public class DataConnectionPredicate {
     BooleanBuilder builder = (BooleanBuilder) searchList(namePattern, implementor,
             null, null, null, authenticationType);
 
-    //특정 Workspace일 경우
+    //For a specific workspace
     if(StringUtils.isNotEmpty(workspaceId)){
-      //전체공개된 모든 Connection OR 해당 workspace에만 공개된 Connection
+      //All open Connection OR Connection open only in the workspace
       builder = builder.and(dataConnection.published.isTrue()
               .or(dataConnection.workspaces.any().id.eq(workspaceId)));
     }

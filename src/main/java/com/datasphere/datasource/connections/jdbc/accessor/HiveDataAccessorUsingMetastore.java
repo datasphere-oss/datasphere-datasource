@@ -41,8 +41,8 @@ import org.slf4j.LoggerFactory;
 
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
-import com.datasphere.datasource.dataconnection.dialect.HiveDialect;
-import com.datasphere.server.datasource.connection.jdbc.HiveMetaStoreJdbcClient;
+import com.datasphere.datasource.connections.jdbc.dialect.HiveDialect;
+import com.datasphere.datasource.connection.jdbc.HiveMetaStoreJdbcClient;
 import com.datasphere.server.util.PolarisUtils;
 
 @Extension

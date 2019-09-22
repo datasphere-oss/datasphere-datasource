@@ -43,15 +43,15 @@ public class DataConnectionEventHandler {
   DataConnectionRepository connectionRepository;
 
   @Autowired
-  ActivityStreamService activityStreamService;
-
+  ActivityStreamService activityStreamService;	// 活动流服务
+  // 在创建连接前处理
   @HandleBeforeCreate
   public void handleBeforeCreate(DataConnection dataConnection) {
     if(BooleanUtils.isNotTrue(dataConnection.getPublished()) && CollectionUtils.isNotEmpty(dataConnection.getWorkspaces())) {
       dataConnection.setLinkedWorkspaces(dataConnection.getWorkspaces().size());
     }
   }
-
+  //在关联保存前处理
   @HandleBeforeLinkSave
   public void handleBeforeLinkSave(DataConnection dataConnection, Object linked) {
 
@@ -79,7 +79,7 @@ public class DataConnectionEventHandler {
       }
     }
   }
-
+  //在连接删除前处理
   @HandleBeforeLinkDelete
   @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
   public void handleBeforeLinkDelete(DataConnection dataConnection, Object linked) {

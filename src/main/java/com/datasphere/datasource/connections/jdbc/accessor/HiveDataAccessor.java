@@ -34,10 +34,10 @@ import com.datasphere.datasource.connections.jdbc.JdbcConnectInformation;
 import com.datasphere.datasource.connections.jdbc.accessor.AbstractJdbcDataAccessor;
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
-import com.datasphere.datasource.dataconnection.dialect.HiveDialect;
+import com.datasphere.datasource.connections.jdbc.dialect.HiveDialect;
 import com.datasphere.server.common.datasource.DataType;
-import com.datasphere.server.datasource.Field;
-import com.datasphere.server.datasource.connection.jdbc.HiveTableInformation;
+import com.datasphere.datasource.Field;
+import com.datasphere.datasource.connection.jdbc.HiveTableInformation;
 import com.datasphere.server.domain.workbench.hive.HiveNamingRule;
 import com.datasphere.server.util.AuthUtils;
 
@@ -150,7 +150,7 @@ public class HiveDataAccessor extends AbstractJdbcDataAccessor {
 
     HiveTableInformation hiveTableInformation = new HiveTableInformation();
     try {
-      //Table 상세 정보 조회
+      //View Table Details
       List<Map<String, Object>> tableDescList = this.executeQueryForList(this.getConnection(), tableDescQuery, null);
 
       boolean isInit = false;
@@ -170,9 +170,9 @@ public class HiveDataAccessor extends AbstractJdbcDataAccessor {
         String descType = StringUtils.trim((String) tableDescRow.get("data_type"));
         String descValue = StringUtils.trim((String) tableDescRow.get("comment"));
 
-        //유의미한 row에 도달했는지 확인.
+        //Determine if meaningful row has been reached.
         if(!isInit){
-          //ColumnName이 # col_name 이거나 3가지 값 모두 empty일 경우는 의미없는 Row
+          //Meaningless Row if ColumnName is # col_name or all three values are empty
           if (columnName.equals("# col_name")) {
             continue;
           }
@@ -183,18 +183,18 @@ public class HiveDataAccessor extends AbstractJdbcDataAccessor {
           isInit = true;
         }
 
-        //Column List 끝났는지 여부.
+        //Whether the Column List is over.
         if (isColumnInfo && StringUtils.isEmpty(columnName)) {
           isColumnInfo = false;
         }
 
-        //ColumnName이 # col_name 이거나 3가지 값 모두 empty일 경우는 의미없는 Row
+        //Meaningless Row if ColumnName is # col_name or all three values are empty
         if (columnName.equals("# col_name")
             || (StringUtils.isEmpty(columnName) && StringUtils.isEmpty(descType) && StringUtils.isEmpty(descValue))) {
           continue;
         }
 
-        //아직 Column List 이면 Continue
+        //If it's still a Column List, Continue
         if (isColumnInfo) {
           Field field = new Field();
           field.setName(columnName);
@@ -206,7 +206,7 @@ public class HiveDataAccessor extends AbstractJdbcDataAccessor {
           continue;
         }
 
-        //# Partition Information 정보..시작 할 경우
+        //# Partition Information
         if (columnName.equals("# Partition Information")) {
           isPartitionInfo = true;
           isDetailedInfo = false;
@@ -239,12 +239,12 @@ public class HiveDataAccessor extends AbstractJdbcDataAccessor {
           partitionInfoMap.put(key, value);
         }
 
-        //# Detailed Table Information 정보
+        //# Detailed Table Information 
         if (isDetailedInfo) {
           detailInfoMap.put(key, value);
         }
 
-        //# Storage Information 정보
+        //# Storage Information 
         if (isStorageInfo) {
           storageInfoMap.put(key, value);
         }

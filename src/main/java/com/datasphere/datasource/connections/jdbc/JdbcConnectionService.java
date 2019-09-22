@@ -34,24 +34,24 @@ import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionEx
 import com.datasphere.server.common.datasource.DataType;
 import com.datasphere.server.common.datasource.LogicalType;
 import com.datasphere.server.common.exception.FunctionWithException;
-import com.datasphere.server.domain.dataconnection.DataConnection;
-import com.datasphere.server.domain.dataconnection.DataConnectionHelper;
-import com.datasphere.server.domain.dataconnection.dialect.HiveDialect;
-import com.datasphere.server.domain.dataconnection.query.NativeCriteria;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeBetweenExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeCurrentDatetimeExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeDateFormatExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeDisjunctionExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeEqExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeOrderExp;
-import com.datasphere.server.domain.dataconnection.query.expression.NativeProjection;
-import com.datasphere.server.domain.dataconnection.query.utils.VarGenerator;
-import com.datasphere.server.datasource.Field;
-import com.datasphere.server.datasource.data.CandidateQueryRequest;
-import com.datasphere.server.datasource.ingestion.jdbc.BatchIngestionInfo;
-import com.datasphere.server.datasource.ingestion.jdbc.JdbcIngestionInfo;
-import com.datasphere.server.datasource.ingestion.jdbc.LinkIngestionInfo;
-import com.datasphere.server.datasource.ingestion.jdbc.SelectQueryBuilder;
+import com.datasphere.datasource.connections.DataConnection;
+import com.datasphere.datasource.connections.DataConnectionHelper;
+import com.datasphere.datasource.connections.jdbc.dialect.HiveDialect;
+import com.datasphere.datasource.connections.query.NativeCriteria;
+import com.datasphere.datasource.connections.query.expression.NativeBetweenExp;
+import com.datasphere.datasource.connections.query.expression.NativeCurrentDatetimeExp;
+import com.datasphere.datasource.connections.query.expression.NativeDateFormatExp;
+import com.datasphere.datasource.connections.query.expression.NativeDisjunctionExp;
+import com.datasphere.datasource.connections.query.expression.NativeEqExp;
+import com.datasphere.datasource.connections.query.expression.NativeOrderExp;
+import com.datasphere.datasource.connections.query.expression.NativeProjection;
+import com.datasphere.datasource.connections.query.utils.VarGenerator;
+import com.datasphere.datasource.Field;
+import com.datasphere.datasource.data.CandidateQueryRequest;
+import com.datasphere.datasource.ingestion.jdbc.BatchIngestionInfo;
+import com.datasphere.datasource.ingestion.jdbc.JdbcIngestionInfo;
+import com.datasphere.datasource.ingestion.jdbc.LinkIngestionInfo;
+import com.datasphere.datasource.ingestion.jdbc.SelectQueryBuilder;
 import com.datasphere.server.domain.engine.EngineProperties;
 import com.datasphere.server.domain.workbook.configurations.filter.Filter;
 import com.datasphere.server.domain.workbook.configurations.filter.InclusionFilter;
@@ -90,7 +90,7 @@ public class JdbcConnectionService {
   public Map<String, Object> getDatabases(JdbcConnectInformation connectInformation, String databaseNamePattern, Pageable pageable) throws SQLException, JdbcDataConnectionException {
     return getDatabases(connectInformation, null, databaseNamePattern, pageable);
   }
-
+  // 通过连接获得数据库
   public Map<String, Object> getDatabases(JdbcConnectInformation connectInformation,
                                           Connection connection,
                                           String databaseNamePattern,
@@ -101,7 +101,7 @@ public class JdbcConnectionService {
                                          pageable == null ? null : pageable.getPageSize(),
                                          pageable == null ? null : pageable.getPageNumber());
   }
-
+  // 更改数据库
   public void changeDatabase(JdbcConnectInformation connectInformation, String databaseName) throws JdbcDataConnectionException {
     changeDatabase(connectInformation, databaseName, null);
   }
@@ -205,7 +205,7 @@ public class JdbcConnectionService {
     columnMap.put("page", pageInfoMap);
     return columnMap;
   }
-
+  // 获得表列名称
   public List<Map<String, Object>> getTableColumnNames(JdbcConnectInformation connectInformation, Connection connection, String schema,
                                                        String tableName, String columnNamePattern, Pageable pageable) throws JdbcDataConnectionException {
     JdbcAccessor jdbcDataAccessor = DataConnectionHelper.getAccessor(connectInformation);
@@ -256,7 +256,7 @@ public class JdbcConnectionService {
   public JdbcQueryResultResponse selectQuery(JdbcConnectInformation connectInformation, Connection conn, String query) throws JdbcDataConnectionException {
     return selectQuery(connectInformation, conn, query, -1, false);
   }
-
+  // 执行Query查询
   public JdbcQueryResultResponse selectQuery(JdbcConnectInformation connectInformation, Connection conn, String query,
                                              int limit, boolean extractColumnName) throws JdbcDataConnectionException {
 
@@ -397,7 +397,7 @@ public class JdbcConnectionService {
 
     String resultFileName = jdbcCSVWriter.write();
 
-    // 결과 셋이 없는 경우 처리
+    // Handle if no result set
     File file = new File(resultFileName);
     if (!file.exists() && file.length() == 0) {
       return null;
@@ -483,12 +483,12 @@ public class JdbcConnectionService {
           } else if (filter instanceof IntervalFilter) {
             IntervalFilter.SelectorType selectorType = ((IntervalFilter) filter).getSelector();
 
-            //최신 유형일 경우
+            //If it's the latest type
             if (selectorType == IntervalFilter.SelectorType.RELATIVE) {
               DateTime startDateTime = ((IntervalFilter) filter).getRelativeStartDate();
               DateTime endDateTime = ((IntervalFilter) filter).utcFakeNow();
               nativeCriteria.add(new NativeBetweenExp(filter.getColumn(), startDateTime, endDateTime));
-              //기간 지정일 경우
+              //If period is specified
             } else if (selectorType == IntervalFilter.SelectorType.RANGE) {
               List<String> intervals = ((IntervalFilter) filter).getEngineIntervals();
               if (intervals != null && !intervals.isEmpty()) {
@@ -521,12 +521,12 @@ public class JdbcConnectionService {
 
     com.datasphere.server.domain.workbook.configurations.field.Field targetField = queryRequest.getTargetField();
 
-    //필수값 체크 target field
+    //Required value check target field
     Preconditions.checkNotNull(targetField, "target field. required.");
 
     //MetaDataSource
-    com.datasphere.server.datasource.DataSource metaDataSource = queryRequest.getDataSource().getMetaDataSource();
-    com.datasphere.server.datasource.Field metaField = metaDataSource.getMetaFieldMap(false, "")
+    com.datasphere.datasource.DataSource metaDataSource = queryRequest.getDataSource().getMetaDataSource();
+    com.datasphere.datasource.Field metaField = metaDataSource.getMetaFieldMap(false, "")
                                                                              .get(targetField.getName());
 
     //Jdbc Connection
@@ -592,7 +592,7 @@ public class JdbcConnectionService {
   private String getTempFileName(String fileName) {
     return getTempFileName(null, fileName);
   }
-
+  // 得到临时文件
   private String getTempFileName(String baseDir, String fileName) {
     if (StringUtils.isEmpty(baseDir)) {
       baseDir = engineProperties.getIngestion().getLocalBaseDir();
@@ -600,7 +600,7 @@ public class JdbcConnectionService {
 
     return baseDir + File.separator + fileName + ".csv";
   }
-
+  // 增量查询到CSV
   public List<String> selectIncrementalQueryToCsv(JdbcConnectInformation connectInformation,
                                                   JdbcIngestionInfo ingestionInfo,
                                                   String dataSourceName,
@@ -627,12 +627,12 @@ public class JdbcConnectionService {
     JdbcDialect jdbcDialect = jdbcDataAccessor.getDialect();
     Connection connection = jdbcDataAccessor.getConnection(ingestionInfo.getDatabase(), true);
 
-    // Max time 이 없는 경우 고려
+    // Max time Consider if you don't have
     DateTime incrementalTime = maxTime == null ? new DateTime(0L) : maxTime;
 
     List<String> tempCsvFiles = Lists.newArrayList();
 
-    // 증분 Query 작성
+    // Create incremental query
     String queryString = new SelectQueryBuilder(realConnection, jdbcDataAccessor.getDialect())
         .projection(fields)
         .query(batchIngestionInfo, connectInformation)
@@ -642,7 +642,7 @@ public class JdbcConnectionService {
 
     LOGGER.debug("Generated incremental query : {} ", queryString);
 
-    // 쿼리 결과 저장
+    // Save query results
     String tempFileName = getTempFileName(dataSourceName + "_" + incrementalTime.toString());
     JdbcCSVWriter jdbcCSVWriter = null;
     try {
@@ -658,7 +658,7 @@ public class JdbcConnectionService {
 
     String resultFileName = jdbcCSVWriter.write();
 
-    // 결과 셋이 없는 경우 처리
+    // Handle if no result set
     File file = new File(resultFileName);
     if (!file.exists() || file.length() == 0) {
       return null;
@@ -687,7 +687,7 @@ public class JdbcConnectionService {
 
     int count = 0;
     try {
-      // 20억건 이상 처리하는게 있을지?
+      // Is there anything more than 2 billion?
       count = jdbcDataAccessor.executeQueryForObject(conn, queryString, Integer.class);
     } catch (Exception e) {
       LOGGER.error("Fail to get count of query : {}", e.getMessage());
@@ -726,7 +726,7 @@ public class JdbcConnectionService {
   }
 
   private String generateUniqueColumnName(String fieldName, List<Field> fieldList) {
-    //Field 명 중복시 난수 추가
+    //Add Random Number When Duplicate Field Names
     long duplicated = fieldList.stream()
                                .filter(field -> field.getName().equals(fieldName))
                                .count();

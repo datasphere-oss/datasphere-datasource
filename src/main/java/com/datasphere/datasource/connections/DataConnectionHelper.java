@@ -48,7 +48,7 @@ import com.datasphere.datasource.connections.jdbc.connector.JdbcConnector;
 import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect;
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
 import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
-import com.datasphere.datasource.dataconnection.connector.CachedUserJdbcConnector;
+import com.datasphere.datasource.connections.jdbc.connector.CachedUserJdbcConnector;
 
 /**
  *

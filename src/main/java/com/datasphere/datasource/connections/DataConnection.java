@@ -71,26 +71,35 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
   @Column(name = "dc_desc")
   @Size(max = 900)
   protected String description;
-
+  // 数据源连接类型
   @Column(name = "dc_type")
   @Enumerated(EnumType.STRING)
   protected SourceType type;
-
-  @Column(name = "dc_url")
+  // 数据库类型
+  @Column(name = "dc_typename")
+  protected String typename;
+  
+  
+@Column(name = "dc_url")
   protected String url;
-
+  // 选项
   @Column(name = "dc_options")
   protected String options;
 
   @Column(name = "dc_published")
   protected Boolean published;
-
+  // 主机名
   @Column(name = "dc_hostname")
   protected String hostname;
-
+  
+  // IP地址
+  @Column(name = "dc_ip")
+  protected String ip;
+  
+  // 端口
   @Column(name = "dc_port")
   protected Integer port;
-
+  // 数据库
   @Column(name = "dc_database")
   protected String database;
 
@@ -99,7 +108,12 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
 
   @Column(name = "dc_sid")
   protected String sid;
-
+  
+  @Column(name = "dc_batchsize")
+  protected Integer batchsize;
+  
+//  private String schema;
+  
   @Column(name = "dc_properties", length = 65535, columnDefinition = "TEXT")
   @JsonRawValue
   @JsonDeserialize(using = KeepAsJsonDeserialzier.class)
@@ -110,13 +124,17 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
 
   @Column(name = "dc_password")
   protected String password;
+  
 
+	
+  // 认证类型
   @Column(name = "dc_authentication_type")
   @Enumerated(EnumType.STRING)
   protected AuthenticationType authenticationType;
 
   /**
-   * 연결된 workspace 개수
+   * Connected workspaces
+   * 与之关联的工作空间
    */
   @Column(name = "dc_linked_workspaces")
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -146,7 +164,7 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
   }
 
   /**
-   * Entity 내 포함되어 있는 객체 일경우 타입별로 Projection 이 제대로 동작하지 않는 이슈로 별도 수행
+   * In case of the object included in Entity, Projection does not work properly for each type.
    */
   public Object getDataConnectionProjection(ProjectionFactory projectionFactory, Class projection) {
     return projectionFactory.createProjection(projection, this);
@@ -337,6 +355,31 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
   public Map<String, String> getPropertiesMap(){
     return GlobalObjectMapper.readValue(this.properties, Map.class);
   }
+  
+  public String getTypename() {
+		return typename;
+	}
+
+	public void setTypename(String typename) {
+		this.typename = typename;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public Integer getBatchsize() {
+		return batchsize;
+	}
+
+	public void setBatchsize(Integer batchsize) {
+		this.batchsize = batchsize;
+	}
+
 
   @Override
   public String toString() {
@@ -346,6 +389,8 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
         ", name='" + name + '\'' +
         ", description='" + description + '\'' +
         ", type=" + type +
+        ", typename=" + typename + '\'' +
+        ", ip=" + ip + '\'' +
         ", url='" + url + '\'' +
         ", options='" + options + '\'' +
         ", published=" + published +
@@ -357,6 +402,7 @@ public class DataConnection extends AbstractHistoryEntity implements DSSDomain<S
         ", properties='" + properties + '\'' +
         ", username='" + username + '\'' +
         ", password='" + password + '\'' +
+        ", batchsize=" + batchsize + '\'' +
         ", authenticationType=" + authenticationType +
         '}';
   }

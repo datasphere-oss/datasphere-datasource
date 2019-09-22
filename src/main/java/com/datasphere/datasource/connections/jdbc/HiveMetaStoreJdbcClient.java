@@ -63,7 +63,7 @@ public class HiveMetaStoreJdbcClient {
     driverManagerDataSource.setDriverClassName(this.connectionDriverName);
     return driverManagerDataSource;
   }
-
+  // 获得Hive中的表
   public List<Map<String, Object>> getTable(String databaseName, String tableNamePattern, String columnNamePattern,
                                             Integer pageSize,
                                             Integer pageNumber){
@@ -100,7 +100,7 @@ public class HiveMetaStoreJdbcClient {
 
     return tableMapList;
   }
-
+  // 获得表的个数
   public int getTableCount(String databaseName, String tableNamePattern, String columnNamePattern){
     StringBuilder builder = new StringBuilder();
     builder.append(" SELECT COUNT(DISTINCT t.TBL_NAME) AS COUNT");
@@ -129,7 +129,7 @@ public class HiveMetaStoreJdbcClient {
     long tableCount = tableCountMap.containsKey("COUNT") ? (long) tableCountMap.get("COUNT") : 0L;
     return Math.toIntExact(tableCount);
   }
-
+  // 获得列名
   public List<Map<String, Object>> getColumns(String databaseName, String tableName, String columnNamePattern){
     StringBuilder builder = new StringBuilder();
 
@@ -155,7 +155,7 @@ public class HiveMetaStoreJdbcClient {
     JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
     return jdbcTemplate.queryForList(builder.toString());
   }
-
+  // 获得分区列表
   public List<Map<String, Object>> getPartitionList(String databaseName, String tableName, List<String> partitionNameList){
     StringBuilder builder = new StringBuilder();
 

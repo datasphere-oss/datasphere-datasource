@@ -23,7 +23,7 @@ import java.util.List;
  * Created by aladin on 2019. 12. 11..
  */
 @Component
-@ConfigurationProperties(prefix = "polaris.dataconnection")
+@ConfigurationProperties(prefix = "datasphere.dataconnection")
 public class DataConnectionProperties {
 
   List<DefaultFilter> defaultFilters;

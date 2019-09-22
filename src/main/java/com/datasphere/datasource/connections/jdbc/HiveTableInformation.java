@@ -15,11 +15,11 @@
 package com.datasphere.datasource.connections.jdbc;
 
 import com.datasphere.server.common.datasource.DataType;
-import com.datasphere.server.datasource.Field;
-import com.datasphere.server.datasource.ingestion.file.CsvFileFormat;
-import com.datasphere.server.datasource.ingestion.file.FileFormat;
-import com.datasphere.server.datasource.ingestion.file.OrcFileFormat;
-import com.datasphere.server.datasource.ingestion.jdbc.SelectQueryBuilder;
+import com.datasphere.datasource.Field;
+import com.datasphere.datasource.ingestion.file.CsvFileFormat;
+import com.datasphere.datasource.ingestion.file.FileFormat;
+import com.datasphere.datasource.ingestion.file.OrcFileFormat;
+import com.datasphere.datasource.ingestion.jdbc.SelectQueryBuilder;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
@@ -82,7 +82,7 @@ public class HiveTableInformation {
     }
     return null;
   }
-
+  // 抽取列名
   private String extractColumnName(String name) {
     return StringUtils.removeStartIgnoreCase(name, SelectQueryBuilder.TEMP_TABLE_NAME + ".");
   }

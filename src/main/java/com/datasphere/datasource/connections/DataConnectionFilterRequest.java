@@ -19,7 +19,7 @@ import java.util.List;
 import com.datasphere.server.common.criteria.ListFilterRequest;
 
 /**
- *
+ * 连接过滤请求
  */
 public class DataConnectionFilterRequest extends ListFilterRequest {
   List<String> workspace;
