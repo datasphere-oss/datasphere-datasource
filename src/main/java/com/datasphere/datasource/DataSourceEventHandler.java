@@ -79,6 +79,8 @@ import java.util.concurrent.ThreadFactory;
 
 import javax.annotation.PostConstruct;
 
+import com.datasphere.datasource.dataconnection.DataConnection;
+import com.datasphere.datasource.dataconnection.DataConnectionRepository;
 import com.datasphere.datasource.ingestion.HiveIngestionInfo;
 import com.datasphere.datasource.ingestion.IngestionHistory;
 import com.datasphere.datasource.ingestion.IngestionHistoryRepository;
@@ -93,8 +95,6 @@ import com.datasphere.server.domain.activities.spec.ActivityGenerator;
 import com.datasphere.server.domain.activities.spec.ActivityObject;
 import com.datasphere.server.domain.activities.spec.ActivityStreamV2;
 import com.datasphere.server.domain.context.ContextService;
-import com.datasphere.server.domain.dataconnection.DataConnection;
-import com.datasphere.server.domain.dataconnection.DataConnectionRepository;
 import com.datasphere.server.domain.engine.DruidEngineMetaRepository;
 import com.datasphere.server.domain.engine.EngineIngestionService;
 import com.datasphere.server.domain.mdm.Metadata;
