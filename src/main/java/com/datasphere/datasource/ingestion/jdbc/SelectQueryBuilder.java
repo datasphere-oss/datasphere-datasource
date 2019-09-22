@@ -23,10 +23,10 @@ import java.util.StringJoiner;
 import org.apache.commons.lang3.StringUtils;
 
 import com.datasphere.datasource.Field;
+import com.datasphere.datasource.connections.jdbc.JdbcConnectInformation;
+import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect;
 import com.datasphere.server.common.datasource.DataType;
 import com.datasphere.server.common.datasource.LogicalType;
-import com.datasphere.server.connections.jdbc.JdbcConnectInformation;
-import com.datasphere.server.connections.jdbc.dialect.JdbcDialect;
 import com.datasphere.server.domain.workbook.configurations.format.UnixTimeFormat;
 import com.datasphere.server.util.TimeUnits;
 

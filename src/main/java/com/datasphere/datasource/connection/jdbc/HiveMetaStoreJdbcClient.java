@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.datasphere.server.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
-import com.datasphere.server.connections.jdbc.exception.JdbcDataConnectionException;
+import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
+import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
 
 public class HiveMetaStoreJdbcClient {
 
@@ -90,11 +90,11 @@ public class HiveMetaStoreJdbcClient {
     if(pageSize != null && pageNumber != null){
       builder.append(" LIMIT " + (pageNumber * pageSize) + ", " + pageSize);
     }
-
+    // 生成查询语句
     String selectQuery = builder.toString();
-
+    //
     JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-
+    // 执行查询返回结果
     List<Map<String, Object>> tableMapList = jdbcTemplate.queryForList(selectQuery);
 
     return tableMapList;

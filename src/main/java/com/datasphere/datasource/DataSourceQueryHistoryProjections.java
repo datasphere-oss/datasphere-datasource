@@ -20,7 +20,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 import com.datasphere.datasource.data.forward.ResultForward;
 import com.datasphere.server.common.BaseProjections;
-import com.datasphere.server.domain.user.UserProfile;
+//import com.datasphere.server.domain.user.UserProfile;
 
 /**
  * Created by aladin on 2019. 9. 3..
@@ -58,8 +58,8 @@ public class DataSourceQueryHistoryProjections extends BaseProjections {
 
     DateTime getCreatedTime();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreator();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreator();
 
   }
 
@@ -86,8 +86,8 @@ public class DataSourceQueryHistoryProjections extends BaseProjections {
 
     DateTime getCreatedTime();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreator();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreator();
 
   }
 }

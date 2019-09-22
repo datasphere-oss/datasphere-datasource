@@ -61,7 +61,7 @@ public class DataSourceQueryHistory extends AbstractHistoryEntity implements DSS
   String id;
 
   /**
-   *  Metatron Query specification
+   *  DataSphere Query specification
    */
   @Column(name = "query")
   @Lob

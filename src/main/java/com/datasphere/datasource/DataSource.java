@@ -92,15 +92,15 @@ import com.datasphere.server.common.entity.Spec;
 import com.datasphere.server.common.exception.DSSException;
 import com.datasphere.server.common.domain.AbstractHistoryEntity;
 import com.datasphere.server.common.domain.DSSDomain;
-import com.datasphere.server.domain.context.ContextEntity;
-import com.datasphere.server.domain.dataprep.entity.PrSnapshot;
-import com.datasphere.server.domain.mdm.Metadata;
-import com.datasphere.server.domain.mdm.MetadataColumn;
-import com.datasphere.server.domain.workbook.DashBoard;
-import com.datasphere.server.domain.workbook.configurations.field.DimensionField;
-import com.datasphere.server.domain.workbook.configurations.field.MeasureField;
-import com.datasphere.server.domain.workbook.configurations.field.TimestampField;
-import com.datasphere.server.domain.workspace.Workspace;
+import com.datasphere.server.common.domain.context.ContextEntity;
+//import com.datasphere.server.domain.dataprep.entity.PrSnapshot;
+//import com.datasphere.server.domain.mdm.Metadata;
+//import com.datasphere.server.domain.mdm.MetadataColumn;
+//import com.datasphere.server.domain.workbook.DashBoard;
+//import com.datasphere.server.domain.workbook.configurations.field.DimensionField;
+//import com.datasphere.server.domain.workbook.configurations.field.MeasureField;
+//import com.datasphere.server.domain.workbook.configurations.field.TimestampField;
+//import com.datasphere.server.domain.workspace.Workspace;
 import com.datasphere.server.util.AuthUtils;
 import com.datasphere.server.util.PolarisUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -252,21 +252,21 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
   @BatchSize(size = 50)
   List<Field> fields;
 
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-  @JoinTable(name = "datasource_workspace",
-      joinColumns = @JoinColumn(name = "ds_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "ws_id", referencedColumnName = "id"))
-  @BatchSize(size = 25)
-  @IndexedEmbedded(includePaths = {"id", "name"}, includeEmbeddedObjectId = true)
-  Set<Workspace> workspaces;
+//  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//  @JoinTable(name = "datasource_workspace",
+//      joinColumns = @JoinColumn(name = "ds_id", referencedColumnName = "id"),
+//      inverseJoinColumns = @JoinColumn(name = "ws_id", referencedColumnName = "id"))
+//  @BatchSize(size = 25)
+//  @IndexedEmbedded(includePaths = {"id", "name"}, includeEmbeddedObjectId = true)
+//  Set<Workspace> workspaces;
 
-  @ManyToMany(cascade = {CascadeType.MERGE})
-  @JoinTable(name = "datasource_dashboard",
-      joinColumns = @JoinColumn(name = "ds_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "dashboard_id", referencedColumnName = "id"))
-  @BatchSize(size = 50)
-  @RestResource(path = "dashboards")
-  Set<DashBoard> dashBoards;
+//  @ManyToMany(cascade = {CascadeType.MERGE})
+//  @JoinTable(name = "datasource_dashboard",
+//      joinColumns = @JoinColumn(name = "ds_id", referencedColumnName = "id"),
+//      inverseJoinColumns = @JoinColumn(name = "dashboard_id", referencedColumnName = "id"))
+//  @BatchSize(size = 50)
+//  @RestResource(path = "dashboards")
+//  Set<DashBoard> dashBoards;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn(name = "dc_id")
@@ -276,17 +276,17 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
   @JoinColumn(name = "smy_id", referencedColumnName = "id")
   DataSourceSummary summary;
 
-  /**
-   * Establish a one-way relationship with Snapshot.
-   * FetchType.EAGER to provide entity information through Spring Projection.
-   * ForeignKey (name = "none"), NotFoundAction.IGNORE to avoid being affected by persistence transitions
-   * even after the Snapshot deletion
-   */
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "ss_id",
-      foreignKey = @javax.persistence.ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-  @NotFound(action = NotFoundAction.IGNORE)
-  PrSnapshot snapshot;
+//  /**
+//   * Establish a one-way relationship with Snapshot.
+//   * FetchType.EAGER to provide entity information through Spring Projection.
+//   * ForeignKey (name = "none"), NotFoundAction.IGNORE to avoid being affected by persistence transitions
+//   * even after the Snapshot deletion
+//   */
+//  @ManyToOne(fetch = FetchType.EAGER)
+//  @JoinColumn(name = "ss_id",
+//      foreignKey = @javax.persistence.ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+//  @NotFound(action = NotFoundAction.IGNORE)
+//  PrSnapshot snapshot;
 
 
   /**
@@ -358,39 +358,39 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
     this.fields.add(field);
   }
 
-  public void addDashBoard(DashBoard dashBoard) {
-    if (dashBoards == null) {
-      dashBoards = Sets.newHashSet();
-    }
+//  public void addDashBoard(DashBoard dashBoard) {
+//    if (dashBoards == null) {
+//      dashBoards = Sets.newHashSet();
+//    }
+//
+//    this.dashBoards.add(dashBoard);
+//  }
 
-    this.dashBoards.add(dashBoard);
-  }
+//  public void updateFromMetadata(Metadata metadata, boolean includeColumns) {
+//
+//    this.name = metadata.getName();
+//    this.description = metadata.getDescription();
+//
+//    if (includeColumns) {
+//      updateFieldFromColumn(metadata);
+//    }
+//
+//  }
 
-  public void updateFromMetadata(Metadata metadata, boolean includeColumns) {
-
-    this.name = metadata.getName();
-    this.description = metadata.getDescription();
-
-    if (includeColumns) {
-      updateFieldFromColumn(metadata);
-    }
-
-  }
-
-  public void updateFieldFromColumn(Metadata metadata) {
-    Map<Long, MetadataColumn> columnMap = metadata.getFieldRefMap();
-
-    for (Field field : this.fields) {
-      Long fieldId = field.getId();
-      if (!columnMap.containsKey(field.getId())) {
-        continue;
-      }
-
-      MetadataColumn metadataColumn = columnMap.get(fieldId);
-      field.updateFromMetaColumn(metadataColumn);
-    }
-
-  }
+//  public void updateFieldFromColumn(Metadata metadata) {
+//    Map<Long, MetadataColumn> columnMap = metadata.getFieldRefMap();
+//
+//    for (Field field : this.fields) {
+//      Long fieldId = field.getId();
+//      if (!columnMap.containsKey(field.getId())) {
+//        continue;
+//      }
+//
+//      MetadataColumn metadataColumn = columnMap.get(fieldId);
+//      field.updateFromMetaColumn(metadataColumn);
+//    }
+//
+//  }
 
   public void excludeUnloadedField() {
     if (CollectionUtils.isEmpty(this.fields)) {
@@ -476,43 +476,43 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
 
   }
 
-  /**
-   * Select Query 생성시 Projection 이 아무것도 없을 경우, DataSource 내 Field 데이터를 기반으로 전달
-   */
-  @JsonIgnore
-  public List<com.datasphere.server.domain.workbook.configurations.field.Field> getAllSpecFields(boolean joinQuery, String joinAlias) {
-
-    List<com.datasphere.server.domain.workbook.configurations.field.Field> resultFields = Lists.newArrayList();
-
-    for (Field field : fields) {
-
-      String ref = null;
-      if (joinQuery) {
-        if (StringUtils.isNotEmpty(joinAlias)) {
-          ref = joinAlias + FIELD_NAMESPACE_SEP + engineName;
-        } else {
-          ref = engineName;
-        }
-      }
-      String fieldName = field.getName();
-
-      switch (field.getRole()) {
-        case DIMENSION:
-          resultFields.add(new DimensionField(fieldName, ref, field.getFormatObject()));
-          break;
-        case MEASURE:
-          resultFields.add(new MeasureField(fieldName, ref));
-          break;
-        case TIMESTAMP:
-          if (BooleanUtils.isNotTrue(field.getDerived())) {
-            resultFields.add(new TimestampField(fieldName, ref, field.getFormatObject()));
-          }
-          break;
-      }
-    }
-
-    return resultFields;
-  }
+//  /**
+//   * Select Query If there is no Projection at the time of creation, based on the field data in the DataSource
+//   */
+//  @JsonIgnore
+//  public List<com.datasphere.server.domain.workbook.configurations.field.Field> getAllSpecFields(boolean joinQuery, String joinAlias) {
+//
+//    List<com.datasphere.server.domain.workbook.configurations.field.Field> resultFields = Lists.newArrayList();
+//
+//    for (Field field : fields) {
+//
+//      String ref = null;
+//      if (joinQuery) {
+//        if (StringUtils.isNotEmpty(joinAlias)) {
+//          ref = joinAlias + FIELD_NAMESPACE_SEP + engineName;
+//        } else {
+//          ref = engineName;
+//        }
+//      }
+//      String fieldName = field.getName();
+//
+//      switch (field.getRole()) {
+//        case DIMENSION:
+//          resultFields.add(new DimensionField(fieldName, ref, field.getFormatObject()));
+//          break;
+//        case MEASURE:
+//          resultFields.add(new MeasureField(fieldName, ref));
+//          break;
+//        case TIMESTAMP:
+//          if (BooleanUtils.isNotTrue(field.getDerived())) {
+//            resultFields.add(new TimestampField(fieldName, ref, field.getFormatObject()));
+//          }
+//          break;
+//      }
+//    }
+//
+//    return resultFields;
+//  }
 
   @JsonIgnore
   public Map<String, Field> getPartitionedFieldMap() {
@@ -549,9 +549,9 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
       StringBuilder key = new StringBuilder();
       if (includePrefix) {
         if (StringUtils.isNotEmpty(joinAlias)) {
-          key.append(joinAlias).append(FIELD_NAMESPACE_SEP);
+          key.append(joinAlias).append(".");
         }
-        key.append(engineName).append(FIELD_NAMESPACE_SEP);
+        key.append(engineName).append(".");
       }
       key.append(field.getName());
       metaFieldMap.put(key.toString(), field);
@@ -561,9 +561,9 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
   }
 
   /**
-   * 파티션된 데이터 소스 명을 찾기 위한 정규표현식 생성
+   * Generate regular expression to find partitioned data source name
    *
-   * @param partitionTargetMap 파티션 필드 순서에 따른 LinkedHashMap 타입의 Map 객체 생성 필요
+   * @param Create a Map object of type LinkedHashMap according to the partitionTargetMap partition field order.
    */
   @JsonIgnore
   public List<String> getRegexDataSourceName(Map<String, Set<String>> partitionTargetMap) {
@@ -764,21 +764,21 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
     this.linkedWorkspaces = linkedWorkspaces;
   }
 
-  public Set<Workspace> getWorkspaces() {
-    return workspaces;
-  }
-
-  public void setWorkspaces(Set<Workspace> workspaces) {
-    this.workspaces = workspaces;
-  }
-
-  public Set<DashBoard> getDashBoards() {
-    return dashBoards;
-  }
-
-  public void setDashBoards(Set<DashBoard> dashBoards) {
-    this.dashBoards = dashBoards;
-  }
+//  public Set<Workspace> getWorkspaces() {
+//    return workspaces;
+//  }
+//
+//  public void setWorkspaces(Set<Workspace> workspaces) {
+//    this.workspaces = workspaces;
+//  }
+//
+//  public Set<DashBoard> getDashBoards() {
+//    return dashBoards;
+//  }
+//
+//  public void setDashBoards(Set<DashBoard> dashBoards) {
+//    this.dashBoards = dashBoards;
+//  }
 
   public DataSourceType getDataSourceType() {
     return dsType;
@@ -876,13 +876,13 @@ public class DataSource extends AbstractHistoryEntity implements DSSDomain<Strin
     this.connection = connection;
   }
 
-  public PrSnapshot getSnapshot() {
-    return snapshot;
-  }
-
-  public void setSnapshot(PrSnapshot snapshot) {
-    this.snapshot = snapshot;
-  }
+//  public PrSnapshot getSnapshot() {
+//    return snapshot;
+//  }
+//
+//  public void setSnapshot(PrSnapshot snapshot) {
+//    this.snapshot = snapshot;
+//  }
 
   public String getIngestion() {
     return ingestion;

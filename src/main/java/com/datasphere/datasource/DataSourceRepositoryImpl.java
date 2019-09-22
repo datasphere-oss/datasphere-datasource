@@ -43,8 +43,9 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-import com.datasphere.server.domain.mdm.Metadata;
-import com.datasphere.server.domain.mdm.source.QMetadataSource;
+import com.datasphere.server.datasource.QDataSource;
+//import com.datasphere.server.domain.mdm.Metadata;
+//import com.datasphere.server.domain.mdm.source.QMetadataSource;
 import com.datasphere.server.domain.workbook.QDashBoard;
 
 public class DataSourceRepositoryImpl extends QuerydslRepositorySupport implements DataSourceSearchRepository, DataSourceRepositoryExtends {
@@ -71,8 +72,8 @@ public class DataSourceRepositoryImpl extends QuerydslRepositorySupport implemen
                                           String nameContains, Boolean linkedMetadata, String searchDateBy, DateTime from, DateTime to,
                                           Pageable pageable) {
 
-    QDataSource dataSource = QDataSource.dataSource;
-    QMetadataSource metadataSource = QMetadataSource.metadataSource;
+//    QDataSource dataSource = QDataSource.dataSource;
+//    QMetadataSource metadataSource = QMetadataSource.metadataSource;
 
     JPQLQuery<DataSource> query = from(dataSource);
 

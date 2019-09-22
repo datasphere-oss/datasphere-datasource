@@ -50,11 +50,11 @@ import javax.validation.constraints.NotNull;
 
 import com.datasphere.datasource.SimilarityQueryRequest;
 import com.datasphere.datasource.connection.jdbc.JdbcConnectionService;
+import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
 import com.datasphere.datasource.data.result.ChartResultFormat;
 import com.datasphere.server.common.MatrixResponse;
 import com.datasphere.server.common.RawJsonString;
 import com.datasphere.server.common.exception.BadRequestException;
-import com.datasphere.server.connections.jdbc.exception.JdbcDataConnectionException;
 import com.datasphere.server.domain.engine.DruidEngineMetaRepository;
 import com.datasphere.server.domain.engine.EngineQueryService;
 import com.datasphere.server.domain.workbook.configurations.Limit;

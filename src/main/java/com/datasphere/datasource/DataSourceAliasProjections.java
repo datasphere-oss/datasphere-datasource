@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
-import com.datasphere.server.domain.user.UserProfile;
+//import com.datasphere.server.domain.user.UserProfile;
 
 /**
  *
@@ -57,11 +57,11 @@ public class DataSourceAliasProjections {
     @Value("#{target.valueAlias == null ? null : @objectMapper.readValue(target.valueAlias, T(java.lang.Object))}")
     Object getValueAlias();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreatedBy();
-
-    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
-    UserProfile getModifiedBy();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreatedBy();
+//
+//    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
+//    UserProfile getModifiedBy();
 
     DateTime getCreatedTime();
 

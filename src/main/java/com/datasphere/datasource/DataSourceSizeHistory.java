@@ -22,8 +22,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.datasphere.server.domain.AbstractHistoryEntity;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.AbstractHistoryEntity;
+import com.datasphere.server.common.domain.DSSDomain;
 
 /**
  * Created by aladin on 2019. 9. 3..

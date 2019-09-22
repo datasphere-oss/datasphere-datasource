@@ -34,9 +34,9 @@ import org.supercsv.io.ICsvResultSetWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.datasphere.datasource.Field;
-import com.datasphere.server.connections.jdbc.dialect.JdbcDialect;
-import com.datasphere.server.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
-import com.datasphere.server.connections.jdbc.exception.JdbcDataConnectionException;
+import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect;
+import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionErrorCodes;
+import com.datasphere.datasource.connections.jdbc.exception.JdbcDataConnectionException;
 
 public class JdbcCSVWriter extends CsvResultSetWriter implements ICsvResultSetWriter {
 

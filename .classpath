@@ -39,5 +39,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/datalayer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DataCatalogCenter_V2.0"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

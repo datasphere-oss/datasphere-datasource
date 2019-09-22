@@ -23,7 +23,7 @@ import com.datasphere.server.common.criteria.ListFilterRequest;
  */
 public class DataSourceFilterRequest extends ListFilterRequest {
   List<String> status;
-  List<String> workspace;
+  List<String> workspace;	// 用户->工作空间->数据源
   List<String> userGroup;
   List<String> dataSourceType;
   List<String> sourceType;

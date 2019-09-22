@@ -26,7 +26,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 import java.util.Set;
 
-import com.datasphere.server.domain.context.ContextDomainRepository;
+import com.datasphere.server.common.domain.context.ContextDomainRepository;
 import com.datasphere.server.domain.workbook.DashBoard;
 import com.datasphere.server.domain.workspace.Workspace;
 

@@ -90,16 +90,17 @@ import com.datasphere.datasource.ingestion.jdbc.BatchIngestionInfo;
 import com.datasphere.datasource.ingestion.jdbc.JdbcIngestionInfo;
 import com.datasphere.datasource.ingestion.jdbc.LinkIngestionInfo;
 import com.datasphere.datasource.ingestion.job.IngestionJobRunner;
+import com.datasphere.datasource.service.DataSourceService;
+import com.datasphere.server.common.domain.context.ContextService;
 import com.datasphere.server.domain.activities.ActivityStreamService;
 import com.datasphere.server.domain.activities.spec.ActivityGenerator;
 import com.datasphere.server.domain.activities.spec.ActivityObject;
 import com.datasphere.server.domain.activities.spec.ActivityStreamV2;
-import com.datasphere.server.domain.context.ContextService;
 import com.datasphere.server.domain.engine.DruidEngineMetaRepository;
 import com.datasphere.server.domain.engine.EngineIngestionService;
-import com.datasphere.server.domain.mdm.Metadata;
-import com.datasphere.server.domain.mdm.MetadataService;
-import com.datasphere.server.domain.workspace.Workspace;
+//import com.datasphere.server.domain.mdm.Metadata;
+//import com.datasphere.server.domain.mdm.MetadataService;
+//import com.datasphere.server.domain.workspace.Workspace;
 import com.datasphere.server.util.AuthUtils;
 import com.datasphere.server.util.PolarisUtils;
 
@@ -120,8 +121,8 @@ public class DataSourceEventHandler {
   @Autowired
   DataSourceService dataSourceService;
 
-  @Autowired
-  MetadataService metadataService;
+//  @Autowired
+//  MetadataService metadataService;
 
   @Autowired
   DataSourceRepository dataSourceRepository;
@@ -416,38 +417,38 @@ public class DataSourceEventHandler {
     metadataService.updateFromDataSource(dataSource, false);
   }
 
-  @HandleBeforeDelete
-  @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
-  public void handleBeforeDelete(DataSource dataSource) {
-    // Context Delete info
-    contextService.removeContextFromDomain(dataSource);
-  }
-
-  @HandleBeforeLinkDelete
-  @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
-  public void handleBeforeLinkDelete(DataSource dataSource, Object linked) {
-    // Count connected workspaces.
-    Set<Workspace> preWorkspaces = dataSourceRepository.findWorkspacesInDataSource(dataSource.getId());
-    // Not a public workspace and linked entity type is Workspace.
-    if (BooleanUtils.isNotTrue(dataSource.getPublished()) &&
-        !CollectionUtils.sizeIsEmpty(preWorkspaces)) {
-      dataSource.setLinkedWorkspaces(dataSource.getWorkspaces().size());
-      LOGGER.debug("DELETED: Set linked workspace in datasource({}) : {}", dataSource.getId(), dataSource.getLinkedWorkspaces());
-
-      for (Workspace workspace : preWorkspaces) {
-        if(!dataSource.getWorkspaces().contains(workspace)) {
-          activityStreamService.addActivity(new ActivityStreamV2(
-              null, null, "Block", null, null,
-              new ActivityObject(dataSource.getId(), "DATASOURCE"),
-              new ActivityObject(workspace.getId(), "WORKSPACE"),
-              new ActivityGenerator("WEBAPP", ""), DateTime.now()));
-
-          LOGGER.debug("[Activity] Block workspace ({}) from datasource ({})", workspace.getId(), dataSource.getId());
-        }
-      }
-    }
-
-  }
+//  @HandleBeforeDelete
+//  @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
+//  public void handleBeforeDelete(DataSource dataSource) {
+//    // Context Delete info
+//    contextService.removeContextFromDomain(dataSource);
+//  }
+//
+//  @HandleBeforeLinkDelete
+//  @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
+//  public void handleBeforeLinkDelete(DataSource dataSource, Object linked) {
+//    // Count connected workspaces.
+//    Set<Workspace> preWorkspaces = dataSourceRepository.findWorkspacesInDataSource(dataSource.getId());
+//    // Not a public workspace and linked entity type is Workspace.
+//    if (BooleanUtils.isNotTrue(dataSource.getPublished()) &&
+//        !CollectionUtils.sizeIsEmpty(preWorkspaces)) {
+//      dataSource.setLinkedWorkspaces(dataSource.getWorkspaces().size());
+//      LOGGER.debug("DELETED: Set linked workspace in datasource({}) : {}", dataSource.getId(), dataSource.getLinkedWorkspaces());
+//
+//      for (Workspace workspace : preWorkspaces) {
+//        if(!dataSource.getWorkspaces().contains(workspace)) {
+//          activityStreamService.addActivity(new ActivityStreamV2(
+//              null, null, "Block", null, null,
+//              new ActivityObject(dataSource.getId(), "DATASOURCE"),
+//              new ActivityObject(workspace.getId(), "WORKSPACE"),
+//              new ActivityGenerator("WEBAPP", ""), DateTime.now()));
+//
+//          LOGGER.debug("[Activity] Block workspace ({}) from datasource ({})", workspace.getId(), dataSource.getId());
+//        }
+//      }
+//    }
+//
+//  }
 
   @HandleAfterDelete
   public void handleDataSourceAfterDelete(DataSource dataSource) {
@@ -492,14 +493,14 @@ public class DataSourceEventHandler {
       }
 
       // Delete Metadata
-      try{
-        Optional<Metadata> metadata = metadataService.findByDataSource(dataSource.getId());
-        if(metadata.isPresent()){
-          metadataService.delete(metadata.get().getId());
-        }
-      } catch (Exception e){
-        LOGGER.warn("Fail to remove metadata related datasource({}) : {} ", dataSource.getId(), e.getMessage());
-      }
+//      try{
+//        Optional<Metadata> metadata = metadataService.findByDataSource(dataSource.getId());
+//        if(metadata.isPresent()){
+//          metadataService.delete(metadata.get().getId());
+//        }
+//      } catch (Exception e){
+//        LOGGER.warn("Fail to remove metadata related datasource({}) : {} ", dataSource.getId(), e.getMessage());
+//      }
     }
 
   }

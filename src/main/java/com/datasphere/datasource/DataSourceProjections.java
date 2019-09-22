@@ -24,8 +24,8 @@ import java.util.Map;
 import com.datasphere.datasource.dataconnection.DataConnection;
 import com.datasphere.datasource.ingestion.IngestionInfo;
 import com.datasphere.server.common.BaseProjections;
-import com.datasphere.server.domain.dataprep.entity.PrSnapshot;
-import com.datasphere.server.domain.user.UserProfile;
+//import com.datasphere.server.domain.dataprep.entity.PrSnapshot;
+//import com.datasphere.server.domain.user.UserProfile;
 
 /**
  *
@@ -53,11 +53,11 @@ public class DataSourceProjections extends BaseProjections {
 
     Boolean getPublished();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreatedBy();
-
-    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
-    UserProfile getModifiedBy();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreatedBy();
+//
+//    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
+//    UserProfile getModifiedBy();
 
     DateTime getCreatedTime();
 
@@ -105,11 +105,11 @@ public class DataSourceProjections extends BaseProjections {
 
     Integer getLinkedWorkspaces();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreatedBy();
-
-    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
-    UserProfile getModifiedBy();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreatedBy();
+//
+//    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
+//    UserProfile getModifiedBy();
 
     DateTime getCreatedTime();
 
@@ -170,7 +170,7 @@ public class DataSourceProjections extends BaseProjections {
 
     DataConnection getConnection();
 
-    PrSnapshot getSnapshot();
+//    PrSnapshot getSnapshot();
 
     Integer getLinkedWorkspaces();
 
@@ -191,11 +191,11 @@ public class DataSourceProjections extends BaseProjections {
     @Value("#{@contextService.getContexts(target)}")
     Map<String, Object> getContexts();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreatedBy();
-
-    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
-    UserProfile getModifiedBy();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreatedBy();
+//
+//    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
+//    UserProfile getModifiedBy();
 
     DateTime getCreatedTime();
 
@@ -245,11 +245,11 @@ public class DataSourceProjections extends BaseProjections {
     @Value("#{@contextService.getContexts(target)}")
     Map<String, Object> getContexts();
 
-    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
-    UserProfile getCreatedBy();
-
-    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
-    UserProfile getModifiedBy();
+//    @Value("#{@cachedUserService.findUserProfile(target.createdBy)}")
+//    UserProfile getCreatedBy();
+//
+//    @Value("#{@cachedUserService.findUserProfile(target.modifiedBy)}")
+//    UserProfile getModifiedBy();
 
     DateTime getCreatedTime();
 
