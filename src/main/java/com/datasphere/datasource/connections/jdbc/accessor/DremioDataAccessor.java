@@ -35,9 +35,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 @Extension
-public class PrestoDataAccessor extends AbstractJdbcDataAccessor {
+public class DremioDataAccessor extends AbstractJdbcDataAccessor {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PrestoDataAccessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DremioDataAccessor.class);
   private static final String TABLE_NAME_COLUMN = "Table";
   private static final String SHOW_CATALOGS = "SHOW CATALOGS";
 
