@@ -156,7 +156,7 @@ public class DataSourceEventHandler {
       "hasPermission(#dataSource, 'PERM_SYSTEM_MANAGE_DATASOURCE')")
   public void checkCreateAuthority(DataSource dataSource) {
 
-    // Owner 등록
+    // Owner Enrollment
     if (StringUtils.isEmpty(dataSource.getOwnerId())) {
       dataSource.setOwnerId(AuthUtils.getAuthUserName());
     }
@@ -201,7 +201,7 @@ public class DataSourceEventHandler {
     }
 
     /*
-      데이터 적재 관련
+      Data loading related
      */
     if (dataSource.getConnType() == ENGINE) {
 
@@ -210,7 +210,7 @@ public class DataSourceEventHandler {
           dataSource.setEngineName(dataSource.getName());
         }
       } else {
-        // 엔진내 datasource 네임 충돌을 방지하기 위하여 추가로 생성
+        // Added to prevent datasource name collisions in the engine
         dataSource.setEngineName(dataSourceService.convertName(dataSource.getName()));
         dataSource.setStatus(PREPARING);
         dataSource.setIncludeGeo(dataSource.existGeoField()); // mark datasource include geo column
@@ -246,7 +246,7 @@ public class DataSourceEventHandler {
 
     } else if (dataSource.getConnType() == LINK) {
 
-      // 엔진내 datasource 네임 충돌을 방지하기 위하여 추가로 생성
+      // Added to prevent datasource name collisions in the engine
       dataSource.setEngineName(dataSourceService.convertName(dataSource.getName()));
 
       LinkIngestionInfo ingestion = (LinkIngestionInfo) dataSource.getIngestionInfo();
@@ -262,7 +262,7 @@ public class DataSourceEventHandler {
   @HandleAfterCreate
   public void handleDataSourceAfterCreate(DataSource dataSource) {
 
-    // IngestionHistory 가 존재하면 저장 수행
+    // Perform save if IngestionHistory exists
     IngestionHistory history = dataSource.getHistory();
     if (history != null) {
       history.setDataSourceId(dataSource.getId());
@@ -277,14 +277,14 @@ public class DataSourceEventHandler {
       metadataService.saveFromDataSource(dataSource);
     }
 
-    // 수집 경로가 아닌 경우 Pass
+    // Pass if not a collection path
     if (dataSource.getIngestion() == null) {
       return;
     }
 
     IngestionInfo info = dataSource.getIngestionInfo();
     if (scheduler != null && info instanceof BatchIngestionInfo) {
-      // 초기 Ingestion 결과 확인
+      // Verify Initial Ingestion Results
       JobKey jobKey = new JobKey("incremental-ingestion", "ingestion");
       TriggerKey triggerKey = new TriggerKey(dataSource.getId(), "ingestion");
 
@@ -316,7 +316,7 @@ public class DataSourceEventHandler {
   @HandleBeforeSave
   @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
   public void handleBeforeSave(DataSource dataSource) {
-    // Context 정보 저장
+    // Context Information storage
     contextService.saveContextFromDomain(dataSource);
   }
 
@@ -351,13 +351,13 @@ public class DataSourceEventHandler {
   @HandleAfterSave
   public void handleDataSourceAfterSave(DataSource dataSource) {
 
-    // 배치 수집 경로가 아닌 경우 Pass
+    // Pass if not a batch collection path
     if (dataSource.getConnType() == ENGINE && dataSource.getIngestion() != null) {
 
       IngestionInfo ingestionInfo = dataSource.getIngestionInfo();
 
       if (ingestionInfo == null) {
-        // 기존 동작하고 있는 적재 task 가 존재하는지 확인후 Cancel
+        // Cancel after checking whether there is an existing loading task
         List<IngestionHistory> ingestionHistories = ingestionHistoryRepository
             .findByDataSourceIdAndStatus(dataSource.getId(), IngestionHistory.IngestionStatus.RUNNING);
 
@@ -367,7 +367,7 @@ public class DataSourceEventHandler {
           }
         }
 
-        // 기존 Trigger 가 동작하고 있다면 종료
+        // Terminate if existing Trigger is in operation
         if (scheduler != null) {
           TriggerKey triggerKey = new TriggerKey(dataSource.getId(), "ingestion");
           try {
@@ -391,7 +391,7 @@ public class DataSourceEventHandler {
           return;
         }
 
-        // 기존 Sheduling 정책과 비교후 변경 가능
+        // Can be changed after comparing with existing Sheduling policy
         String cronExpr = trigger.getCronExpression();
         String afterCronExpr = batchIngestionInfo.getPeriod().getCronExpr();
         if (!cronExpr.equals(afterCronExpr)) {
@@ -408,7 +408,7 @@ public class DataSourceEventHandler {
           }
         }
       } else if (ingestionInfo instanceof RealtimeIngestionInfo) {
-        // TODO: 기존 동작하고 있는 적재 task 가 존재하는지 확인 (재정의 필요)
+        // TODO: Check if a loading task already exists (needs redefinition)
       }
     }
 
@@ -419,7 +419,7 @@ public class DataSourceEventHandler {
   @HandleBeforeDelete
   @PreAuthorize("hasAuthority('PERM_SYSTEM_MANAGE_DATASOURCE')")
   public void handleBeforeDelete(DataSource dataSource) {
-    // Context 정보 삭제
+    // Context Delete info
     contextService.removeContextFromDomain(dataSource);
   }
 
@@ -454,7 +454,7 @@ public class DataSourceEventHandler {
 
     if (dataSource.getConnType() == ENGINE) {
 
-      // Batch 적재용 Trigger 종료
+      // Batch Loading Trigger End
       if (dataSource.getSrcType() == JDBC
           && dataSource.getIngestionInfo() instanceof BatchIngestionInfo) {
 

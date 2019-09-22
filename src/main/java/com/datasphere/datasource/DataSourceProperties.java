@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by aladin on 2019. 12. 11..
  */
 @Component
-@ConfigurationProperties(prefix = "polaris.datasource")
+@ConfigurationProperties(prefix = "datasphere.datasource")
 public class DataSourceProperties {
 
   Map<String, List<String>> connections;

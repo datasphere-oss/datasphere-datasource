@@ -31,7 +31,7 @@ public class SimilarityResponse implements Serializable {
   String to;
 
   /**
-   * 1에 가까울수록 유사성 커짐 ( to cadinaltiy / from cadinality )
+   * The closer to the greater the similarity ( to cadinaltiy / from cadinality )
    */
   Double similarity;
 

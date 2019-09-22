@@ -27,14 +27,14 @@ import com.datasphere.server.common.exception.BadRequestException;
 import com.datasphere.server.domain.workbook.configurations.datasource.DataSource;
 
 /**
- * "Similarity" 쿼리용 Request 객체
+ * "Similarity" Request object for query
  *
  * @since 1.1
  */
 public class SimilarityQueryRequest extends AbstractQueryRequest implements QueryRequest, Serializable {
 
   /**
-   * 질의할 데이터 소스 명
+   * Name of data source to query
    *
    */
   List<String> dataSources;

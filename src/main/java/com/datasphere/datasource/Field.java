@@ -54,8 +54,8 @@ import com.datasphere.server.common.entity.SearchParamValidator;
 import com.datasphere.server.common.entity.Spec;
 import com.datasphere.server.common.exception.BadRequestException;
 import com.datasphere.server.connections.jdbc.dialect.JdbcDialect;
-import com.datasphere.server.domain.CollectionPatch;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.CollectionPatch;
+import com.datasphere.server.common.domain.DSSDomain;
 import com.datasphere.server.domain.mdm.MetadataColumn;
 import com.datasphere.server.domain.workbook.configurations.field.MeasureField;
 import com.datasphere.server.domain.workbook.configurations.field.MeasureField.AggregationType;
@@ -392,7 +392,7 @@ public class Field implements DSSDomain<Long> {
   }
 
   /**
-   * Ingestion spec. 처리시 확인 할 것
+   * Ingestion spec.What to check during processing
    */
   @JsonIgnore
   public Aggregation getAggregation(boolean isRelay) {
@@ -405,7 +405,7 @@ public class Field implements DSSDomain<Long> {
       return new GenericSumAggregation(name, getOriginalName(), "double");
     }
 
-    // TODO: SUM/MIN/MAX 타입도 체크해야하는지 확인 해볼것
+    // TODO: SUM/MIN/MAX Check if the type should be checked
     switch (aggrType) {
       case SUM:
         return new GenericSumAggregation(name, getOriginalName(), "double");
@@ -824,7 +824,7 @@ public class Field implements DSSDomain<Long> {
   public static class RequiredSeqAscCompare implements Comparator<Field> {
 
     /**
-     * 오름차순(ASC)
+     * Ascending order (ASC)
      */
     @Override
     public int compare(Field field1, Field field2) {

@@ -75,7 +75,7 @@ public interface DataSourceRepository extends JpaRepository<DataSource, String>,
   List<DataSource> findByDsType(DataSource.DataSourceType dsType);
 
   /**
-   * Size History 배치잡에서 활용 용도
+   * Size History Use in batch job
    */
   @RestResource(exported = false)
   Page<DataSource> findByDsTypeAndConnTypeAndStatus(DataSource.DataSourceType dsType,

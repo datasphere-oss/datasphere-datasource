@@ -37,7 +37,7 @@ import javax.persistence.Table;
 
 import com.datasphere.server.common.GlobalObjectMapper;
 import com.datasphere.server.common.KeepAsJsonDeserialzier;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.DSSDomain;
 import com.datasphere.server.domain.engine.model.SegmentMetaDataResponse;
 
 /**

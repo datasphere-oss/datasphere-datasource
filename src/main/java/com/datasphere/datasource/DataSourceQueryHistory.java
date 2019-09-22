@@ -41,8 +41,8 @@ import com.datasphere.datasource.data.SearchQueryRequest;
 import com.datasphere.datasource.data.SummaryQueryRequest;
 import com.datasphere.datasource.data.forward.ResultForward;
 import com.datasphere.server.common.GlobalObjectMapper;
-import com.datasphere.server.domain.AbstractHistoryEntity;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.AbstractHistoryEntity;
+import com.datasphere.server.common.domain.DSSDomain;
 
 /**
  * Created by aladin on 2019. 8. 30..
@@ -61,91 +61,91 @@ public class DataSourceQueryHistory extends AbstractHistoryEntity implements DSS
   String id;
 
   /**
-   *  Metatron 질의 스펙
+   *  Metatron Query specification
    */
   @Column(name = "query")
   @Lob
   String query;
 
   /**
-   *  질의 대상 DataSource Id
+   *  Query target DataSource Id
    */
   @Column(name = "query_ds_id")
   String dataSourceId;
 
   /**
-   *  질의 대상 연결 타입
+   *  Query target connection type
    */
   @Column(name = "query_connection_type")
   DataSource.ConnectionType connType;
 
   /**
-   *  Metatron 질의 타입
+   *  DataSphere Query type
    */
   @Column(name = "query_type")
   @Enumerated(EnumType.STRING)
   QueryType queryType;
 
   /**
-   * 엔진 질의 스펙
+   * Engine query specification
    */
   @Column(name = "query_engine")
   @Lob
   String engineQuery;
 
   /**
-   * 엔진 질의 ID
+   * Engine query ID
    */
   @Column(name = "query_engine_id")
   String engineQueryId;
 
   /**
-   * 엔진 질의 타입
+   * Engine query type
    */
   @Column(name = "query_engine_type")
   @Enumerated(EnumType.STRING)
   EngineQueryType engineQueryType;
 
   /**
-   * 엔진 결과 처리 타입
+   * Engine Result Processing Type
    */
   @Column(name = "query_engine_forward")
   @Enumerated(EnumType.STRING)
   ResultForward.ForwardType forwardType;
 
   /**
-   * 질의 성공 여부
+   * Query success
    */
   @Column(name = "query_succeed")
   Boolean succeed;
 
   /**
-   * 질의 실패시 메시지 표시
+   * Display message when query fails
    */
   @Column(name = "query_message")
   @Size(max = 5000)
   String message;
 
   /**
-   * 질의 결과 카운트
+   * Query result count
    */
   @Column(name = "query_result_count")
   Long resultCount;
 
   /**
-   * 질의 결과 Size
+   * Query result Size
    */
   @Column(name = "query_result_size")
   Long resultSize;
 
   /**
-   * 전체 질의 소요시간
+   * Total query time
    */
   @Column(name = "query_elapsed_time")
   Long elapsedTime;
 
   /**
-   * 엔진 질의 시간
+   * Engine query time
    */
   @Column(name = "query_engine_elapsed_time")
   Long engineElapsedTime;

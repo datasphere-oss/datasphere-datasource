@@ -28,7 +28,7 @@ public interface DataSourceRepositoryExtends {
                                      String searchDateBy, DateTime from, DateTime to, Pageable pageable);
 
   /**
-   * Workbook Id 를 통해 workbook 내 포함된 대시보드에서 연결한 데이터 소스 ID 목록 조회
+   * Workbook Id A list of data source IDs that you have linked from embedded dashboards within your workbook
    *
    * @param workbookId
    * @return
@@ -36,8 +36,8 @@ public interface DataSourceRepositoryExtends {
   List<String> findIdsByWorkbookIn(String workbookId);
 
   /**
-   * Workbook Id 를 통해 workbook 내 포함된 대시보드에서 연결한 데이터 소스 ID 목록 조회,
-   * 전체 공개된 데이터 소스 제외
+   * Workbook Id A list of data source IDs that you have linked from embedded dashboards within your workbook,
+   * Exclude all published data sources
    *
    * @param workbookId
    * @return

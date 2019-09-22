@@ -22,12 +22,12 @@ import org.joda.time.DateTime;
 public class DataSourceQueryHistoryPredicate {
 
   /**
-   * 데이터 소스 기본 검색 관련 조건 정의
+   * Defining Conditions Related to Data Source Basic Search
    *
    * @param queryType type of query
    * @param succeed whether succeed
-   * @param from 검색 시작일자, yyyy-MM-ddThh:mm:ss.SSSZ
-   * @param to 검색 종료일자, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param from Search start date, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param to Search end date, yyyy-MM-ddThh:mm:ss.SSSZ
    * @return
    */
   public static Predicate searchList(String dataSourceId,

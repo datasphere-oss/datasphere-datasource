@@ -31,17 +31,17 @@ import com.datasphere.server.domain.workspace.Workspace;
 public class DataSourcePredicate {
 
   /**
-   * 데이터 소스 기본 검색 관련 조건 정의
+   * Defining Conditions Related to Data Source Basic Search
    *
    * @param type           type of datasource
    * @param connectionType type of connection
    * @param sourceType     type of source
    * @param status         engine status
-   * @param published      전체 공개 여부
-   * @param nameContains   데이터 소스 명 내 포함되는 문자
-   * @param searchDateBy   일자 검색 기준 (생성일/수정일
-   * @param from           검색 시작일자, yyyy-MM-ddThh:mm:ss.SSSZ
-   * @param to             검색 종료일자, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param published      Full visibility
+   * @param nameContains   Characters contained within data source name
+   * @param searchDateBy   Date Search Criteria (Created / Modified Date
+   * @param from           Search start date, yyyy-MM-ddThh:mm:ss.SSSZ
+   * @param to             Search end date, yyyy-MM-ddThh:mm:ss.SSSZ
    */
   public static Predicate searchList(DataSource.DataSourceType type, DataSource.ConnectionType connectionType,
                                      DataSource.SourceType sourceType, DataSource.Status status,
@@ -89,7 +89,7 @@ public class DataSourcePredicate {
   }
 
   /**
-   * Workspace 내에서 사용가능한 데이터 소스 조회 조건 정의
+   * Define data source query conditions available within a workspace
    */
   public static Predicate searchDatasourcesInWorkspace(Workspace workspace,
                                                        DataSource.DataSourceType sourceType,
@@ -122,17 +122,17 @@ public class DataSourcePredicate {
       builder.and(dataSource.status.in(status));
     }
 
-    // Source Type 별 조회
+    // Source Type Star lookup
     if (sourceType != null) {
       builder.and(dataSource.dsType.eq(sourceType));
     }
 
-    // Connection Type 별 조회
+    // Connection Type Star lookup
     if (connectionType != null) {
       builder.and(dataSource.connType.eq(connectionType));
     }
 
-    // Datasource 명 검색
+    // Datasource Search
     if (StringUtils.isNotEmpty(nameContains)) {
       builder.and(dataSource.name.containsIgnoreCase(nameContains));
     }

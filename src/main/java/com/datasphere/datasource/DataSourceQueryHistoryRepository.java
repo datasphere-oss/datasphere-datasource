@@ -56,7 +56,7 @@ public interface DataSourceQueryHistoryRepository extends JpaRepository<DataSour
           "where h.dataSourceId = :dataSourceId AND h.modifiedTime > :criteriaTime AND h.createdBy = u.username " +
           "group by h.createdBy, u.fullName " +
           "order by h.createdBy")
-  // 사용자별 질의분포 차트에 name 으로 표시해야 해서 query 수정.
+  // Fix query because it should be displayed as name in user-specific query distribution chart.
   List<Object> findByQueryCountPerUser(@Param("dataSourceId") String dataSourceId,
                                        @Param("criteriaTime") DateTime criteriaTime);
 

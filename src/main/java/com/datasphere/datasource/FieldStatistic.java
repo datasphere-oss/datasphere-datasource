@@ -22,7 +22,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import com.datasphere.server.common.KeepAsJsonDeserialzier;
-import com.datasphere.server.domain.DSSDomain;
+import com.datasphere.server.common.domain.DSSDomain;
 
 /**
  * Created by aladin on 2019. 5. 15..
