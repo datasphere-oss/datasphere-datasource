@@ -55,7 +55,7 @@ import com.datasphere.server.common.datasource.LogicalType;
 import com.datasphere.server.common.entity.SearchParamValidator;
 import com.datasphere.server.common.entity.Spec;
 import com.datasphere.server.common.exception.BadRequestException;
-import com.datasphere.server.common.domain.CollectionPatch;
+import com.datasphere.server.domain.workbook.CollectionPatch;
 import com.datasphere.server.common.domain.DSSDomain;
 //import com.datasphere.server.domain.mdm.MetadataColumn;
 import com.datasphere.server.domain.workbook.configurations.field.MeasureField;
