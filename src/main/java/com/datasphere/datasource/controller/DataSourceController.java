@@ -122,8 +122,8 @@ import com.datasphere.server.domain.workbook.configurations.datasource.DefaultDa
 import com.datasphere.server.domain.workbook.configurations.filter.Filter;
 import com.datasphere.server.domain.workbook.configurations.filter.IntervalFilter;
 import com.datasphere.server.utils.AuthUtils;
-import com.datasphere.server.util.CommonsCsvProcessor;
-import com.datasphere.server.util.ExcelProcessor;
+import com.datasphere.datasource.utils.CommonsCsvProcessor;
+import com.datasphere.datasource.utils.ExcelProcessor;
 import com.datasphere.server.util.PolarisUtils;
 import com.datasphere.server.util.ProjectionUtils;
 import com.google.common.base.Preconditions;
