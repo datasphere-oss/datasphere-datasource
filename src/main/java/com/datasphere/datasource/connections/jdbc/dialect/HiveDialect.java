@@ -36,6 +36,8 @@ import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect.InputSpec;
 import com.datasphere.datasource.connections.jdbc.dialect.JdbcDialect.Scope;
 import com.datasphere.server.common.exception.FunctionWithException;
 
+import static com.datasphere.server.connections.jdbc.dialect.JdbcDialect.METATRON_PROPERTY_PREFIX;
+
 
 /**
  *
