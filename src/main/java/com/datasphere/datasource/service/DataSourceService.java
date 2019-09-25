@@ -71,7 +71,7 @@ import com.datasphere.server.user.group.GroupMemberRepository;
 import com.datasphere.server.user.group.GroupService;
 import com.datasphere.server.user.role.RoleDirectory;
 import com.datasphere.server.user.role.RoleDirectoryRepository;
-import com.datasphere.server.util.AuthUtils;
+import com.datasphere.server.utils.AuthUtils;
 import com.datasphere.server.util.PolarisUtils;
 import com.google.common.collect.Lists;
 import com.querydsl.core.types.Predicate;
