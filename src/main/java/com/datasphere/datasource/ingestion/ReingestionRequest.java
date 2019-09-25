@@ -3,7 +3,7 @@ package com.datasphere.datasource.ingestion;
 import java.io.Serializable;
 import java.util.List;
 
-import com.datasphere.server.domain.CollectionPatch;
+import com.datasphere.server.domain.workbook.CollectionPatch;
 
 public class ReingestionRequest implements Serializable {
 
